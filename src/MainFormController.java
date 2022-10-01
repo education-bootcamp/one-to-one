@@ -22,6 +22,17 @@ public class MainFormController {
     public TableColumn colCustomerAddress;
     public TableColumn colCustomerName;
     public TableColumn colCustomerSalary;
+    public TextField txtVehicleId;
+    public TextField txtVehicleBrand;
+    public TextField txtVehicleType;
+    public TextField txtVehicleColor;
+    public TableView tblVehicles;
+    public TableColumn colVehicleId;
+    public TableColumn colVehicleBrand;
+    public TableColumn colVehicleType;
+    public TableColumn colCustomerIdOfVehicle;
+    public TableColumn colVehicleColor;
+    public TableColumn colCustomerNameOfVehicle;
 
     public void initialize(){
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -61,5 +72,8 @@ public class MainFormController {
             loadCustomers();
         }
 
+    }
+
+    public void saveVehicleOnAction(ActionEvent actionEvent) {
     }
 }
