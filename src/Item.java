@@ -75,4 +75,15 @@ public class Item {
     public void setTotalCost(int qtyOnHand) {
         this.qtyOnHand = qtyOnHand;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "code='" + code + '\'' +
+                ", description=" + description +
+                ", unitPrice=" + unitPrice +
+                ", qtyOnHand=" + qtyOnHand +
+                ", details=" + details +
+                '}';
+    }
 }

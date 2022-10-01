@@ -208,10 +208,11 @@ public class MainFormController {
     private void saveItemDetails(Order o, CartTm tm) {
         try(Session session= HibernateUtil.createSession()){
             Item i =session.get(Item.class,tm.getId());
-
+            System.out.println(i);
             OrderDetails od= new OrderDetails(0,tm.getQty(),i.getUnitPrice());
             od.setItem(i);
             od.setOrder(o);
+            System.out.println(od);
 
             Transaction transaction = session.beginTransaction();
             session.save(od);

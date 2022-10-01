@@ -84,4 +84,15 @@ public class OrderDetails {
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDetails{" +
+                "id=" + id +
+                ", qty=" + qty +
+                ", unitPrice=" + unitPrice +
+                ", item=" + item +
+                ", order=" + order +
+                '}';
+    }
 }
