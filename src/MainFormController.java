@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class MainFormController {
@@ -194,10 +195,28 @@ public class MainFormController {
             Transaction transaction = session.beginTransaction();
             session.save(o);
             transaction.commit();
+            for (CartTm tm: itemCartList
+            ) {
+                saveItemDetails(o, tm);
+            }
             new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
             loadOrders();
         }
 
+    }
+
+    private void saveItemDetails(Order o, CartTm tm) {
+        try(Session session= HibernateUtil.createSession()){
+            Item i =session.get(Item.class,tm.getId());
+
+            OrderDetails od= new OrderDetails(0,tm.getQty(),i.getUnitPrice());
+            od.setItem(i);
+            od.setOrder(o);
+
+            Transaction transaction = session.beginTransaction();
+            session.save(od);
+            transaction.commit();
+        }
     }
 
     private void loadOrders() {
@@ -218,14 +237,14 @@ public class MainFormController {
 
         }
     }
-ObservableList<CartTm> tmList=FXCollections.observableArrayList();
+ObservableList<CartTm> itemCartList=FXCollections.observableArrayList();
     public void addToCartOnAction(ActionEvent actionEvent) {
         if (cmbItemCodes.getValue()==null){
             new Alert(Alert.AlertType.WARNING, "Select an Item").show();
             return;
         }
-        tmList.add(new CartTm(cmbItemCodes.getValue().toString()
+        itemCartList.add(new CartTm(cmbItemCodes.getValue().toString()
                 ,Integer.parseInt(txtQty.getText())));
-        tblCart.setItems(tmList);
+        tblCart.setItems(itemCartList);
     }
 }

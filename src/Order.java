@@ -34,6 +34,14 @@ public class Order {
         this.cost = cost;
     }
 
+    public List<OrderDetails> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<OrderDetails> details) {
+        this.details = details;
+    }
+
     public Customer getCustomer() {
         return customer;
     }

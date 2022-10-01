@@ -28,6 +28,22 @@ public class Item {
         this.qtyOnHand = qtyOnHand;
     }
 
+    public int getQtyOnHand() {
+        return qtyOnHand;
+    }
+
+    public void setQtyOnHand(int qtyOnHand) {
+        this.qtyOnHand = qtyOnHand;
+    }
+
+    public List<OrderDetails> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<OrderDetails> details) {
+        this.details = details;
+    }
+
     public String getCode() {
         return code;
     }
