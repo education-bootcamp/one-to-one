@@ -1,4 +1,6 @@
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -13,6 +15,9 @@ public class Customer {
     @OneToOne(mappedBy = "customer")
     private Vehicle vehicle;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders= new ArrayList<>();
+
     public Customer() {
     }
 
@@ -21,6 +26,14 @@ public class Customer {
         this.name = name;
         this.address = address;
         this.salary = salary;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public Vehicle getVehicle() {
