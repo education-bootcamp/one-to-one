@@ -40,6 +40,14 @@ public class MainFormController {
         colCustomerAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colCustomerSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         loadCustomers();
+
+
+        //========
+        tblCustomer.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    selectedCustomer=newValue;
+                });
     }
 
     private void loadCustomers() {
@@ -74,6 +82,32 @@ public class MainFormController {
 
     }
 
+    CustomerTm selectedCustomer=null;
     public void saveVehicleOnAction(ActionEvent actionEvent) {
+        if (selectedCustomer==null){
+            new Alert(Alert.AlertType.WARNING, "Select a Customer").show();
+            return;
+        }
+
+        Vehicle v1= new Vehicle(
+                txtVehicleId.getText(),
+                txtVehicleBrand.getText(),
+                txtVehicleType.getText(),txtVehicleColor.getText()
+        );
+        v1.setCustomer(new Customer(
+                selectedCustomer.getId(),
+                selectedCustomer.getName(),
+                selectedCustomer.getAddress(),
+                selectedCustomer.getSalary()
+        ));
+
+        try(Session session=HibernateUtil.createSession()){
+            Transaction transaction = session.beginTransaction();
+            session.save(v1);
+            transaction.commit();
+            new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
+           // loadVehicles();
+        }
+
     }
 }

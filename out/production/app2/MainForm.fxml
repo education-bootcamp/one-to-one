@@ -21,19 +21,19 @@
             <TableColumn fx:id="colCustomerSalary" prefWidth="219.0" text="Salary" />
         </columns>
       </TableView>
-      <TextField layoutX="16.0" layoutY="323.0" promptText="Vehicle Id" />
-      <TextField layoutX="187.0" layoutY="323.0" promptText="Vehicle Brand" />
-      <TextField layoutX="358.0" layoutY="323.0" promptText="Type" />
-      <TextField layoutX="530.0" layoutY="323.0" prefHeight="27.0" prefWidth="251.0" promptText="Color" />
-      <Button layoutX="690.0" layoutY="369.0" mnemonicParsing="false" text="Save Vehicle" />
-      <TableView layoutX="12.0" layoutY="407.0" prefHeight="252.0" prefWidth="768.0">
+      <TextField fx:id="txtVehicleId" layoutX="16.0" layoutY="323.0" promptText="Vehicle Id" />
+      <TextField fx:id="txtVehicleBrand" layoutX="187.0" layoutY="323.0" promptText="Vehicle Brand" />
+      <TextField fx:id="txtVehicleType" layoutX="358.0" layoutY="323.0" promptText="Type" />
+      <TextField fx:id="txtVehicleColor" layoutX="530.0" layoutY="323.0" prefHeight="27.0" prefWidth="251.0" promptText="Color" />
+      <Button layoutX="690.0" layoutY="369.0" mnemonicParsing="false" onAction="#saveVehicleOnAction" text="Save Vehicle" />
+      <TableView fx:id="tblVehicles" layoutX="12.0" layoutY="407.0" prefHeight="252.0" prefWidth="768.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Vehicle Id" />
-            <TableColumn prefWidth="127.0" text="Brand" />
-            <TableColumn prefWidth="147.0" text="Type" />
-            <TableColumn prefWidth="114.0" text="Color" />
-            <TableColumn prefWidth="135.0" text="Customer Id" />
-            <TableColumn prefWidth="168.0" text="Customer Name" />
+            <TableColumn fx:id="colVehicleId" prefWidth="75.0" text="Vehicle Id" />
+            <TableColumn fx:id="colVehicleBrand" prefWidth="127.0" text="Brand" />
+            <TableColumn fx:id="colVehicleType" prefWidth="147.0" text="Type" />
+            <TableColumn fx:id="colVehicleColor" prefWidth="114.0" text="Color" />
+            <TableColumn fx:id="colCustomerIdOfVehicle" prefWidth="135.0" text="Customer Id" />
+            <TableColumn fx:id="colCustomerNameOfVehicle" prefWidth="168.0" text="Customer Name" />
          </columns>
       </TableView>
    </children>
