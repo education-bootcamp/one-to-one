@@ -15,12 +15,6 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Configuration configuration = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Customer.class)
-                .addAnnotatedClass(Vehicle.class);
-        configuration.buildSessionFactory();
-
         primaryStage.setScene(
                 new Scene(FXMLLoader.load(
                         getClass().getResource("MainForm.fxml"))));
