@@ -33,7 +33,7 @@ public class MainFormController {
     public TextField txtOrderId;
     public DatePicker txtOrderDate;
     public TextField txtOrderCost;
-    public TableView tblOrders;
+    public TableView<OrderTm> tblOrders;
     public TableColumn colOrderId;
     public TableColumn colOrderDate;
     public TableColumn colOrderCost;
@@ -53,8 +53,16 @@ public class MainFormController {
         colCustomerIdOfVehicle.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         colCustomerNameOfVehicle.setCellValueFactory(new PropertyValueFactory<>("customerName"));
 
+
+        colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        colOrderDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colOrderCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        colCustomerIdOfOrder.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colCustomerNameOfOrder.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+
         loadCustomers();
         loadVehicles();
+        loadOrders();
 
 
         //========
@@ -147,5 +155,45 @@ public class MainFormController {
     }
 
     public void saveOrderOnAction(ActionEvent actionEvent) {
+        if (selectedCustomer == null) {
+            new Alert(Alert.AlertType.WARNING, "Select a Customer").show();
+            return;
+        }
+        Order o= new Order(txtOrderId.getText(),txtOrderDate.getValue().toString(),
+                Double.parseDouble(txtOrderCost.getText()));
+        o.setCustomer(new Customer(
+                selectedCustomer.getId(),
+                selectedCustomer.getName(),
+                selectedCustomer.getAddress(),
+                selectedCustomer.getSalary()
+        ));
+
+        try (Session session = HibernateUtil.createSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.save(o);
+            transaction.commit();
+            new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
+            loadOrders();
+        }
+
+    }
+
+    private void loadOrders() {
+        ObservableList<OrderTm> tmList = FXCollections.observableArrayList();
+        try (Session session = HibernateUtil.createSession()) {
+            Query from_orders =
+                    session.createQuery("FROM Order");
+            List<Order> list = from_orders.list();
+
+            for (Order o : list
+            ) {
+                tmList.add(new OrderTm(
+                        o.getId(),
+                        o.getOrderDate(), o.getCost(),
+                        o.getCustomer().getId(), o.getCustomer().getName()));
+            }
+            tblOrders.setItems(tmList);
+
+        }
     }
 }
