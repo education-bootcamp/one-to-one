@@ -39,6 +39,11 @@ public class MainFormController {
     public TableColumn colOrderCost;
     public TableColumn colCustomerIdOfOrder;
     public TableColumn colCustomerNameOfOrder;
+    public ComboBox<String> cmbItemCodes;
+    public TableView<CartTm> tblCart;
+    public TextField txtQty;
+    public TableColumn colItemCode;
+    public TableColumn colItemQty;
 
     public void initialize() {
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -60,9 +65,14 @@ public class MainFormController {
         colCustomerIdOfOrder.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         colCustomerNameOfOrder.setCellValueFactory(new PropertyValueFactory<>("customerName"));
 
+
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colItemQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+
         loadCustomers();
         loadVehicles();
         loadOrders();
+        loadAllItemCodes();
 
 
         //========
@@ -71,6 +81,18 @@ public class MainFormController {
                 .addListener((observable, oldValue, newValue) -> {
                     selectedCustomer = newValue;
                 });
+    }
+
+    private void loadAllItemCodes() {
+        try (Session session = HibernateUtil.createSession()) {
+            Query from_item =
+                    session.createQuery("FROM Item");
+            List<Item> list = from_item.list();
+            for (Item i : list
+            ) {
+                cmbItemCodes.getItems().add(i.getCode());
+            }
+        }
     }
 
     private void loadCustomers() {
@@ -195,5 +217,15 @@ public class MainFormController {
             tblOrders.setItems(tmList);
 
         }
+    }
+ObservableList<CartTm> tmList=FXCollections.observableArrayList();
+    public void addToCartOnAction(ActionEvent actionEvent) {
+        if (cmbItemCodes.getValue()==null){
+            new Alert(Alert.AlertType.WARNING, "Select an Item").show();
+            return;
+        }
+        tmList.add(new CartTm(cmbItemCodes.getValue().toString()
+                ,Integer.parseInt(txtQty.getText())));
+        tblCart.setItems(tmList);
     }
 }
