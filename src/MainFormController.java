@@ -1,10 +1,7 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -33,6 +30,15 @@ public class MainFormController {
     public TableColumn colCustomerIdOfVehicle;
     public TableColumn colVehicleColor;
     public TableColumn colCustomerNameOfVehicle;
+    public TextField txtOrderId;
+    public DatePicker txtOrderDate;
+    public TextField txtOrderCost;
+    public TableView tblOrders;
+    public TableColumn colOrderId;
+    public TableColumn colOrderDate;
+    public TableColumn colOrderCost;
+    public TableColumn colCustomerIdOfOrder;
+    public TableColumn colCustomerNameOfOrder;
 
     public void initialize() {
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -138,5 +144,8 @@ public class MainFormController {
             tblVehicles.setItems(tmList);
 
         }
+    }
+
+    public void saveOrderOnAction(ActionEvent actionEvent) {
     }
 }
