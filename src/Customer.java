@@ -1,7 +1,4 @@
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "customer")
@@ -13,6 +10,9 @@ public class Customer {
     private String address;
     private double salary;
 
+    @OneToOne(mappedBy = "customer")
+    private Vehicle vehicle;
+
     public Customer() {
     }
 
@@ -21,6 +21,14 @@ public class Customer {
         this.name = name;
         this.address = address;
         this.salary = salary;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public String getId() {

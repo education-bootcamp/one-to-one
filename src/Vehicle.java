@@ -1,7 +1,4 @@
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "vehicle")
@@ -13,6 +10,14 @@ public class Vehicle {
     private String type;
     private String color;
 
+    @OneToOne
+    @JoinColumn(
+            name = "customer_id",
+            nullable = false,
+            unique = true
+    )
+    private Customer customer;
+
     public Vehicle() {
     }
 
@@ -21,6 +26,14 @@ public class Vehicle {
         this.brand = brand;
         this.type = type;
         this.color = color;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getVehicleId() {
