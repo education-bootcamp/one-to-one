@@ -6,20 +6,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="670.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainFormController">
    <children>
-      <TextField layoutX="14.0" layoutY="14.0" promptText="Customer Id" />
-      <TextField layoutX="185.0" layoutY="14.0" promptText="Customer Name" />
-      <TextField layoutX="356.0" layoutY="14.0" promptText="Customer Address" />
-      <TextField layoutX="528.0" layoutY="14.0" prefHeight="27.0" prefWidth="251.0" promptText="Customer Salary" />
-      <Button layoutX="677.0" layoutY="60.0" mnemonicParsing="false" text="Save Customer" />
-      <TableView layoutX="14.0" layoutY="105.0" prefHeight="200.0" prefWidth="768.0">
+      <TextField fx:id="txtCustomerId" layoutX="14.0" layoutY="14.0" promptText="Customer Id" />
+      <TextField fx:id="txtCustomerName" layoutX="185.0" layoutY="14.0" promptText="Customer Name" />
+      <TextField fx:id="txtCustomerAddress" layoutX="356.0" layoutY="14.0" promptText="Customer Address" />
+      <TextField fx:id="txtCustomerSalary" layoutX="528.0" layoutY="14.0" prefHeight="27.0" prefWidth="251.0" promptText="Customer Salary" />
+      <Button layoutX="677.0" layoutY="60.0" mnemonicParsing="false" onAction="#saveCustomerOnAction" text="Save Customer" />
+      <TableView fx:id="tblCustomer" layoutX="14.0" layoutY="105.0" prefHeight="200.0" prefWidth="768.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="208.0" text="Name" />
-            <TableColumn prefWidth="263.0" text="Address" />
-            <TableColumn prefWidth="219.0" text="Salary" />
+          <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="colCustomerName" prefWidth="208.0" text="Name" />
+            <TableColumn fx:id="colCustomerAddress" prefWidth="263.0" text="Address" />
+            <TableColumn fx:id="colCustomerSalary" prefWidth="219.0" text="Salary" />
         </columns>
       </TableView>
       <TextField layoutX="16.0" layoutY="323.0" promptText="Vehicle Id" />
