@@ -1,4 +1,6 @@
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -16,6 +18,12 @@ public class Order {
             nullable = false
     )
     private Customer customer;
+
+    @OneToMany(mappedBy = "order",cascade = {
+            CascadeType.ALL
+    })
+    private List<OrderDetails> details= new ArrayList<>();
+
 
     public Order() {
     }

@@ -1,6 +1,6 @@
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Item {
@@ -12,6 +12,11 @@ public class Item {
     private double unitPrice;
     @Column(name = "total_cost")
     private int qtyOnHand;
+
+    @OneToMany(mappedBy = "item",cascade = {
+            CascadeType.ALL
+    })
+    private List<OrderDetails> details= new ArrayList<>();
 
     public Item() {
     }
